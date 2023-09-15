@@ -5,6 +5,8 @@ const { contractABI } = require('./contractABI');
 // Specify the Ethereum node's HTTP provider URL
 // const web3 = new Web3('http://localhost:8545');// Replace with your Ethereum node URL
 //const web3 = new Web3('http://127.0.0.1:7545'); 
+
+////// Connect to your Smart Contract ///////
 const web3 = new Web3(window.ethereum);
 
 const contractAddress = '0x244B222a0Aa1E436F18355db5f3E5f4c1580C1cD'; // Address of your deployed contract
@@ -17,6 +19,9 @@ contract.methods.someFunction().call((error, result) => {
         console.error(error);
     }
 });
+///// Send Transaction ///////
+// 
+
 
 const account = '0x28e3AA09E779D9557E992eFE0C82fA6d28489e64'; // The user's Ethereum address
 const privateKey = '0xf10f058e709b89453bd672f6cf95fdffdf94d2dfe075deda5ae85a04ea5b23a1'; // The user's private key
@@ -42,6 +47,18 @@ web3.eth.accounts.signTransaction(tx, privateKey)
     .catch((error) => {
         console.error('Transaction error:', error);
     });
+//////
+
+////// Handle Event //////
+contract.events.EventName()
+    .on('data', (event) => {
+        console.log('Event data:', event.returnValues);
+        // Update your frontend with the event data
+    })
+    .on('error', (error) => {
+        console.error('Event error:', error);
+    });
+//////////
 
 
 // Sample code for handling form submissions and page navigation
@@ -79,7 +96,7 @@ paymentForm.addEventListener("submit", (e) => {
 const loginButton = document.getElementById("loginButton");
 if (loginButton) {
     loginButton.addEventListener("click", () => {
-        window.location.href = "login.html"; // Replace with the actual URL of your login page
+        window.location.href = "./login.html"; // Replace with the actual URL of your login page
     });
 }
 
